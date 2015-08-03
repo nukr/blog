@@ -25,6 +25,9 @@ $ brew install --HEAD neovim
 ```bash
 $ cd ~/.vim/bundle/YouCompleteMe
 $ ./install.sh --clang-completer
+
+$ cd ~/.vim/tern_for_vim
+$ npm i
 ```
 
 不照這個步驟裝很容易失敗
