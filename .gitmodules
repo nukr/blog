@@ -1,3 +1,6 @@
 [submodule "themes/yilia"]
 	path = themes/yilia
 	url = git://github.com/litten/hexo-theme-yilia.git
+[submodule "themes/clean-blog"]
+	path = themes/clean-blog
+	url = git://github.com/klugjo/hexo-theme-clean-blog.git

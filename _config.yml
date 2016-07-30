@@ -62,7 +62,13 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yilia
+theme: clean-blog
+menu:
+  Home: /
+  Archives: /archinve
+  Github:
+    url: https://github.com/nukr
+    icon: github
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
