@@ -44,17 +44,20 @@ docker run \
 ## project
 
 .drone.yml
+
 ```yml
 pipeline:
   test:
-    image: mhart/alpine-node:6.3.1
+    image: node:6.3.1
     commands:
       - echo hihi
   docker:
     repo: project/repo
-    tag: latest
+    tag:
+      - latest
+      - ${DRONE_TAG##v}
     when:
-      event: [push]
+      event: tag
 ```
 
 put .drone.yml to your repo root
