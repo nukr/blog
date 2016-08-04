@@ -5,7 +5,8 @@ tags: [ci, drone]
 
 # Drone 0.5 build process
 
-All process build on ubuntu 16.04 and fish-shell
+All process build on ubuntu 16.04 and
+[fish-shell](https://fishshell.com/)
 
 ## server
 
@@ -60,42 +61,25 @@ pipeline:
       event: tag
 ```
 
-put .drone.yml to your repo root
+put .drone.yml to your repo root then sign
+
+```bash
+drone sign account/repo
+# create .drone.yml.sig
+```
 
 ## client
 
 ```bash
+# drone secret add --image=<image-your-want-limit> account/repo KEY VALUE
+
 # docker login
-begin
-  set -lx DRONE_TOKEN <your-token-copy-from-gui>
-  set -lx DRONE_SERVER http://<your-drone-domain-or-ip>
-  drone secret add --image=docker account/repo DOCKER_REGISTRY asia.gcr.io
-end
+set -x DRONE_TOKEN <your-token-copy-from-gui>
+set -x DRONE_SERVER http://<your-drone-domain-or-ip>
+drone secret add --image=docker account/repo DOCKER_REGISTRY asia.gcr.io
+drone secret add --image=docker account/repo DOCKER_USERNAME _json_key
 
-begin
-  set -lx DRONE_TOKEN <your-token-copy-from-gui>
-  set -lx DRONE_SERVER http://<your-drone-domain-or-ip>
-  drone secret add --image=docker account/repo DOCKER_USERNAME _json_key
-end
+set -lx PASSWORD (cat credential.json)
+drone secret add --image=docker account/repo DOCKER_PASSWORD "$PASSWORD"
 
-begin
-  set -lx DRONE_TOKEN <your-token-copy-from-gui>
-  set -lx DRONE_SERVER http://<your-drone-domain-or-ip>
-  set -lx PASSWORD "(cat credential.json)"
-  drone secret add --image=docker account/repo DOCKER_PASSWORD $PASSWORD
-end
-
-# no need to set other secret normally
-begin
-  set -lx DRONE_TOKEN <your-token-copy-from-gui>
-  set -lx DRONE_SERVER http://<your-drone-domain-or-ip>
-  drone secret add --image=<image-your-want-limit> account/repo KEY VALUE
-end
-
-# sign in your repo root
-begin
-  set -lx DRONE_TOKEN <your-token-copy-from-gui>
-  set -lx DRONE_SERVER http://<your-drone-domain-or-ip>
-  drone sign account/repo
-end
 ```
